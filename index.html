@@ -1,4 +1,4 @@
-<<!doctype html>
+<!doctype html>
 <html lang="en">
     <head>
         <title>Hangman</title>
@@ -22,17 +22,58 @@
     <body>
         <header></header>
         <main>
-            <div class="container">
-                <h1 class="text-center">Hangman</h1>
+            <div class="card m-2 p-2">
+                <h1 class="card-title text-center">Hangman</h1>
                 <div class="row justify-content-d-flex">
-                    <div class="col-4 text-bg-success text-center justify-content-around p-2">Easy</div>
-                    <div class="col-4 text-bg-warning text-center justify-content-around p-2">Medium</div>
-                    <div class="col-4 text-bg-danger text-center justify-content-around p-2">Hard</div>
+                    <div class="row mb-4">
+                        <div class="col-4">
+                            <button id="easyBtn" class="btn btn-success w-100">Easy</button>
+                        </div>
+                    
+                        <div class="col-4">
+                            <button id="mediumBtn" class="btn btn-warning w-100">Medium</button>
+                        </div>
+                    
+                        <div class="col-4">
+                            <button id="hardBtn" class="btn btn-danger w-100">Hard</button>
+                        </div>
+                    </div>
                 </div>
-                
+
+
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <h3 id="wordDisplay">_ _ _ _ _ _ _ _ _ _</h3>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <p>Guessed Letters:</p>
+                        <div id="guessedLetters"></div>
+                    </div>
+                </div>
+
+                <!---->
+                <div class="row justify-content-center mb-4">
+                    <div class="col-10">
+                        <div id="keyboard" class="d-flex flex-wrap gap-2 justify-content-center">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- reset button -->
+                <div class="row">
+                    <div class="col">
+                        <button id="resetBtn" class="btn btn-primary">New Game</button>
+                    </div>
+                </div>
             </div>
         </main>
+
         <footer></footer>
+        <script src="script.js"></script>
         <!-- Bootstrap JavaScript Libraries -->
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

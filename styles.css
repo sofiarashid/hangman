@@ -7,7 +7,22 @@ body {
     letter-spacing: 10px;
     font-size: 2rem;
 }
-
+.worddisplayunderlines {
+    background-color: #D2BCCB;
+    color: #48284A;
+    border: 3px solid #48284A;
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
+img {
+    height: 150%;
+    width: auto;
+}
 .titlefont {
     font-size: 75px;
     text-decoration: underline;
@@ -17,7 +32,8 @@ body {
 }
 
 .sdfont {
-    font-size: 25px;
+    font-size: 40px;
+    text-decoration: underline;
 }
 
 .cardfont {
@@ -100,6 +116,28 @@ body {
     height: 80px;
     font-size: 40px;
     font-weight: bolder;
-    font-family: "marvin-shadow", sans-serif;
+    font-family: "video-cond", serif;
     font-style: normal;
+}
+.newgame:hover {
+    background-color: #D2BCCB;
+    border: 3px solid #48284A;
+    color: #48284A;
+}
+.selectdifficulty {
+    background-color: #48284A;
+    border: 3px solid #D2BCCB;
+    color: #EADCE6;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    font-weight: bolder;
+    font-family: "video-cond", serif;
+}
+.selectdifficulty:hover {
+    background-color: #D2BCCB;
+    border: 3px solid #48284A;
+    color: #48284A;
 }

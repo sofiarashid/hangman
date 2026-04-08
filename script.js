@@ -3,39 +3,125 @@ const mediumBtn = ['football', 'basketball', 'baseball', 'tennis', 'golf', 'hock
 const hardBtn = ['broccoli', 'carrot', 'cucumber', 'tomato', 'lettuce', 'pepper', 'onion', 'garlic', 'spinach', 'zucchini'];
 
 const wordDisplay = document.getElementById('wordDisplay');
-const guessedLettersDisplay = document.getElementById('guessedLetters');
-const remainingGuessesDisplay = document.getElementById('remainingGuesses');
-const messageDisplay = document.getElementById('message');
-const guessInput = document.getElementById('guessInput');
-const guessBtn = document.getElementById('guessBtn');
-const easyBtnElement = document.getElementById('easyBtn');
-const mediumBtnElement = document.getElementById('mediumBtn');
-const hardBtnElement = document.getElementById('hardBtn');
+const usedLettersDisplay = document.getElementById('usedLetters');
+const attemptsDisplay = document.getElementById('attemptsremaining');
+const easyBtn = document.getElementById('easyBtn');
+const mediumBtn = document.getElementById('mediumBtn');
+const hardBtn = document.getElementById('hardBtn');
+const resetBtn = document.getElementById('resetBtn');
+const hangmanImage = document.getElementById('hangmanImage');
+
 
 let selectedWord = '';
 let guessedLetters = [];
-let remainingGuesses = 6;
-
+let wrongGuesses = 0;
+let maxGuesses = 6;
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    // any code here will load as soon as the page loads
-        for (let i=0; i<easyBtn.length; i++) {
-        console.log()
-    }
-    startGame();
+    // anything is gonna load as soon as the page loads
+    hangmanImage.src = "hangman1.png";
+    easyBtn.addEventListener("click", function(){
+        maxGuesses = 6;
+        startGame(easyWords);
+    });
+    mediumBtn.addEventListener("click", functiom() {
+        maxGuesses=6;
+        startGame(mediumWords);
+    });
+    hardBtn.addEventListener("click", function(){
+        maxGuesses = 6;
+        startGame(hardWords);
+    });
+    resetBtn.addEventListener("click", restartGame);
 });
 
-function startGame() {
-    //pick random word, reset variables, build starting display, update elements on page
-    let display = "";
+function startGame(wordBank) {
+    // pick random word, reset variables, build starting display, update elements on page
+    selectedWord = wordBank[Math.floor(Math.random()*wordBank.length)];
+    guessedLetters = [];
+    wrongGuesses=0;
+    hangmanImage.src="hangman1.png";
+    const buttons = document.querySelectorAll(".buttonsdiv");
+    buttons.forEach(btn => btn. disabled = false);
+    updateDisplay();
+}
 
+//update word display
+function updateDisplay(){
+    let display = "";
     for (let i=0; i<selectedWord.length; i++) {
-        let letter = selectedWord.charAt(i);
-        if (guessedLetters.includes(letter)) {
+        let letter = selectedWord.chartAt(i);
+        if (guessedLetters.includes(letter)){
             display += letter + " ";
-        } else {
+        }
+        else {
             display += "_ ";
         }
     }
+    wordDisplay.textContent = display;
+    usedLettersDisplay.textContent = guessedLetters.join(" ");
+    attemptsDisplay.textContent = maxGuesses - wrongGuesses;
+    checkWin();
+}
+
+//every letter button click
+function pressLetter(letter) {
+    letter=letter.toLowerCase();
+    // if u guess the same letter twice nothing happens
+    if (guessedLetters.includes(letter)) {
+        return;
+    }
+    guessedLetters.push(letter);
+    //wrong guess
+    if (!selectedWord.includes(letter)) {
+        wrongGuesses++;
+        //update hangman image
+        hangmanImage.src = "hangman" + (wrongGuesses + 1) + ".png";
+    }
+    updateDisplay();
+    checkLose();
+}
+
+//win
+function checkWin() {
+    let solved = true;
+    for (i=0; i < selectedWord.length; i++) {
+        let letter = selectedWord.chartAt(i);
+        if (!guessedLetters.includes(letter)){
+            solved=false;
+        }
+    }
+    if (solved) {
+        wordDisplay.textContent = "YOU WIN!";
+        disableButtons();
+    }
+}
+
+//lose
+function checkLose() {
+    if (wrongGuesses >= maxGuesses) {
+        wordDisplay.textContent = "YOU LOSE! Word was: " + selectedWord;
+    hangmanImage.src = "hangman7.png"
+    disableButtons();
+    }
+}
+
+//make letters not work
+function disableButtons(){
+    const buttons = document.querySelectorAll(".buttonsdiv");
+    buttons.forEach(btn => btn.disabled = true);
+}
+
+//restart game
+function restartGame() {
+    selectedWord = "";
+    guessedLetters = [];
+    wrongGuesses = 0;
+    hangmanImage.src = "hangman1.png";
+    usedLettersDisplay.textContent = "";
+    attemptsDisplay.textContent = "0";
+    wordDisplay.textContent = "_ _ _ _ _"
+    const buttons = document.querySelectorAll(".buttonsdiv");
+    buttons.forEach(btn => btn.disabled = false);
 }

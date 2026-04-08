@@ -1,6 +1,6 @@
-const easyBtn = ['turtle', 'cat', 'dog', 'fish', 'bird', 'bear', 'monkey', 'cow', 'duck', 'frog'];
-const mediumBtn = ['football', 'basketball', 'baseball', 'tennis', 'golf', 'hockey', 'volleyball', 'cricket', 'rugby', 'badminton'];
-const hardBtn = ['broccoli', 'carrot', 'cucumber', 'tomato', 'lettuce', 'pepper', 'onion', 'garlic', 'spinach', 'zucchini'];
+const easyWords = ['turtle', 'cat', 'dog', 'fish', 'bird', 'bear', 'monkey', 'cow', 'duck', 'frog'];
+const mediumWords = ['football', 'basketball', 'baseball', 'tennis', 'golf', 'hockey', 'volleyball', 'cricket', 'rugby', 'badminton'];
+const hardWords = ['broccoli', 'carrot', 'cucumber', 'tomato', 'lettuce', 'pepper', 'onion', 'garlic', 'spinach', 'zucchini'];
 
 const wordDisplay = document.getElementById('wordDisplay');
 const usedLettersDisplay = document.getElementById('usedLetters');
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         maxGuesses = 6;
         startGame(easyWords);
     });
-    mediumBtn.addEventListener("click", functiom() {
+    mediumBtn.addEventListener("click", function() {
         maxGuesses=6;
         startGame(mediumWords);
     });
@@ -43,7 +43,7 @@ function startGame(wordBank) {
     wrongGuesses=0;
     hangmanImage.src="hangman1.png";
     const buttons = document.querySelectorAll(".buttonsdiv");
-    buttons.forEach(btn => btn. disabled = false);
+    buttons.forEach(btn => btn.disabled = false);
     updateDisplay();
 }
 
@@ -51,7 +51,7 @@ function startGame(wordBank) {
 function updateDisplay(){
     let display = "";
     for (let i=0; i<selectedWord.length; i++) {
-        let letter = selectedWord.chartAt(i);
+        let letter = selectedWord.charAt(i);
         if (guessedLetters.includes(letter)){
             display += letter + " ";
         }
@@ -86,8 +86,8 @@ function pressLetter(letter) {
 //win
 function checkWin() {
     let solved = true;
-    for (i=0; i < selectedWord.length; i++) {
-        let letter = selectedWord.chartAt(i);
+    for (let i=0; i < selectedWord.length; i++) {
+        let letter = selectedWord.charAt(i);
         if (!guessedLetters.includes(letter)){
             solved=false;
         }
@@ -121,7 +121,7 @@ function restartGame() {
     hangmanImage.src = "hangman1.png";
     usedLettersDisplay.textContent = "";
     attemptsDisplay.textContent = "0";
-    wordDisplay.textContent = "_ _ _ _ _"
+    wordDisplay.textContent = ""
     const buttons = document.querySelectorAll(".buttonsdiv");
     buttons.forEach(btn => btn.disabled = false);
 }

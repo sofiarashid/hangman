@@ -67,6 +67,7 @@ function updateDisplay(){
 
 //every letter button click
 function pressLetter(letter) {
+    if (selectedWord === "") return;
     letter=letter.toLowerCase();
     // if u guess the same letter twice nothing happens
     if (guessedLetters.includes(letter)) {
